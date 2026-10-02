@@ -1,0 +1,63 @@
+{% load static %}
+<footer class="footer mt-5 pt-5 pb-4">
+    <div class="container text-md-start">
+        <div class="row text-md-start">
+            
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h5 class="text-uppercase mb-4 fw-bold text-gold">Mobileri Titi</h5>
+                <p class="text-light-50">
+                    Artizanat në dru dhe dizajn modern. Ne realizojmë mobilimin e ëndrrave tuaja me cilësinë më të lartë në treg.
+                </p>
+                <div class="social-icons mt-3">
+                    <a href="https://www.facebook.com/share/1BBW7w6BC9/?mibextid=wwXIfr" class="me-3 text-white text-decoration-none"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/mobilerititi?igsh=MXMxaXdjZTlybjE4eA==" class="me-3 text-white text-decoration-none"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/355697809643?text=Përshëndetje Mobileri Titi!" class="me-3 text-white text-decoration-none"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold text-gold">Vendndodhja</h6>
+                <div class="map-wrapper">
+                    <a href="https://maps.app.goo.gl/zJ8u6fHvGKFfw1uGA?g_st=iw" target="_blank" class="text-decoration-none">
+                        <div class="custom-map-card shadow-lg">
+                            <img src="{% static 'images/harta.jpeg' %}" alt="Harta Mobileri Titi" class="img-fluid">
+                            <div class="map-hover-overlay">
+                                <span><i class="fas fa-external-link-alt me-2"></i>HAP HARTËN</span>
+                            </div>
+                        </div>
+                        <p class="text-light-50 small mt-2 text-center">
+                            <i class="fas fa-map-marker-alt me-2 text-gold"></i> Kryqezimi i Cerrikut, Elbasan
+                        </p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold text-gold">Orari</h6>
+                <p class="text-light-50 mb-1 small"><i class="far fa-clock me-2"></i> E Hënë - E Shtunë: 08:00 - 16:00</p>
+                <p class="text-light-50 mb-1 small"><i class="far fa-clock me-2"></i> E djelë: 08:00 - 14:00</p>
+                
+            </div>
+
+            <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+                <h6 class="text-uppercase mb-4 fw-bold text-gold">Kontakt Info</h6>
+                <p class="text-light-50 mb-1 small"><i class="fas fa-envelope me-2"></i> info@mobilerititi.com</p>
+                <p class="text-light-50 mb-1 small"><i class="fas fa-phone me-2"></i> +355 6X XXX XXXX</p>
+            </div>
+        </div>
+
+        <hr class="mb-4 mt-5 bg-secondary" style="opacity: 0.1;">
+
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="text-light-50">
+                    © <span id="year"></span> <strong class="text-gold">Mobileri Titi</strong> - Të gjitha të drejtat të rezervuara.
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>

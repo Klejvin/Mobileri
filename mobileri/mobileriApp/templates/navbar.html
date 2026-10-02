@@ -1,0 +1,42 @@
+{% load static%}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <img src="{% static 'images/logo.png' %}" alt="Mobileri Titi Logo" height="50" class="me-2">
+            <span class="mobileri fw-bold text-uppercase tracking-wider">Mobileri Titi</span>
+        </a>
+
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="{% url 'homePage'%}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="{% url 'produktetPage'%}">Produktet</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link px-3" href="#rreth-nesh">Rreth Nesh</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#galeria">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-3" href="#kontakti">Kontakt</a>
+                </li> -->
+                
+               <li class="nav-item ms-lg-4">
+    <a class="btn btn-outline-light rounded-pill px-4" href="https://wa.me/355697809643?text=Përshëndetje Mobileri Titi!" target="_blank">
+        <i class="fab fa-whatsapp me-2"></i> Na Kontaktoni
+    </a>
+</li>
+            </ul>
+        </div>
+    </div>
+</nav>
+

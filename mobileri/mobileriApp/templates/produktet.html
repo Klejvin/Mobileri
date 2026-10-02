@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Katalogu i Produkteve | Mobileri Titi {% endblock %}
+
+{% block content %}
+<div class="container py-5 mt-5">
+    
+    <div class="text-center mb-5 pt-4">
+        <h6 class="text-gold fw-bold text-uppercase tracking-widest animated fadeInDown">Katalogu i Plotë</h6>
+        <h2 class="display-5 fw-bold animated fadeInUp">Zbuloni Koleksionet tona</h2>
+        <div class="divider mx-auto" style="width: 60px; height: 3px; background-color: #d4a373; margin-top: 15px;"></div>
+    </div>
+
+    <div class="row g-4">
+        {% for produkt in produktet %}
+        <div class="col-md-6 col-lg-4 col-xl-3">
+            <!-- Linku mbështjellës që bën të gjithë kartën të klikueshme -->
+            <a href="{% url 'detajetPage' produkt.pk %}" class="product-card-link text-decoration-none">
+                <div class="category-card position-relative overflow-hidden rounded shadow-sm">
+                    
+                    {% if produkt.imazhi %}
+                        <img src="{{ produkt.imazhi.url }}" class="img-fluid category-img w-100" alt="{{ produkt.emri }}" style="height: 100%; object-fit: cover;">
+                    {% else %}
+                        <img src="{% static 'images/placeholder.jpg' %}" class="img-fluid category-img w-100" alt="Imazhi mungon" style="height: 100%; object-fit: cover;">
+                    {% endif %}
+                    
+                    <div class="category-overlay d-flex flex-column justify-content-end p-4">
+                        <span class="text-gold small fw-bold text-uppercase mb-1" style="letter-spacing: 1px;">
+                            {{ produkt.kategoria.emri }}
+                        </span>
+                        
+                        <h4 class="text-white fw-bold mb-1">{{ produkt.emri }}</h4>
+                        
+                        <p class="text-white-50 small mb-3 d-none d-md-block">
+                            {{ produkt.pershkrimi|truncatechars:50 }}
+                        </p>
+                        
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="text-white fw-bold h5 mb-0">{{ produkt.cmimi }}</span>
+                            <!-- Butoni mbetet si element vizual -->
+                            <div class="btn btn-outline-gold btn-sm rounded-pill px-3 text-uppercase fw-bold" style="font-size: 0.75rem;">
+                                Detajet
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <div class="p-5 border rounded bg-light">
+                <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">Nuk u gjet asnjë produkt në katalog.</h4>
+                <a href="/" class="btn btn-gold mt-3 rounded-pill px-4">Kthehu në Krye</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .product-card-link {
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .product-card-link:hover {
+        transform: translateY(-5px); /* Një animacion i lehtë kur afrohet mausi */
+    }
+
+    .col-xl-3 .category-card {
+        height: 380px;
+    }
+    
+    @media (max-width: 768px) {
+        .col-md-6 .category-card {
+            height: 320px;
+        }
+    }
+
+    /* Sigurohemi që overlay-i të jetë gjithmonë mbi foto */
+    .category-overlay {
+        z-index: 2;
+    }
+</style>
+{% endblock %}

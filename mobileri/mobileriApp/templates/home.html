@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home page {% endblock %}
+
+{% block content %}
+
+<div id="heroCarousel" class="carousel slide carousel-fade shadow-lg" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+
+    <div class="carousel-inner">
+        
+        <div class="carousel-item active" data-bs-interval="5000">
+            <div class="overlay"></div>
+            <img src="{% static 'images/foto1.jpeg' %}" class="d-block w-100 carousel-img" alt="Kuzhinë Moderne Mobileri Titi">
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-center text-md-start">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-9 col-sm-12">
+                            <h6 class="text-uppercase text-gold fw-bold mb-3 tracking-wider animated fadeInDown small-mobile">Artizanat në çdo detaj</h6>
+                            <h1 class="display-5 display-md-2 fw-bold text-white mb-4 animated fadeInUp title-mobile">Mobilim që flet për ty, cilësi që zgjat në kohë.
+                            </h1>
+                            <p class="lead text-white-50 mb-4 mb-md-5 animated fadeInUp p-mobile">Transformo hapësirën tënde me stil modern dhe elegancë.</p>
+                            <div class="animated fadeInUp d-flex flex-column flex-md-row justify-content-center justify-content-md-start gap-3">
+                                <a href="{% url 'produktetPage' %}" class="btn btn-gold rounded-pill px-4 py-2 px-md-5 py-md-3 fw-bold text-uppercase btn-mobile">Shiko Produktet</a>
+                                <a href="#kontakti" class="btn btn-outline-light rounded-pill px-4 py-2 px-md-5 py-md-3 fw-bold text-uppercase btn-mobile">Na Kontaktoni</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <div class="overlay"></div>
+            <img src="{% static 'images/foto2.jpeg' %}" class="d-block w-100 carousel-img" alt="Dhomë Gjumi Elegante Mobileri Titi">
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-center text-md-end">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-md-end">
+                        <div class="col-lg-7 col-md-9 col-sm-12">
+                            <h6 class="text-uppercase text-gold fw-bold mb-3 tracking-wider animated fadeInDown small-mobile">Rehati dhe Elegancë</h6>
+                            <h1 class="display-5 display-md-2 fw-bold text-white mb-4 animated fadeInUp title-mobile">Bëje shtëpine tënde të duket si në revista.
+                            </h1>
+                            <p class="lead text-white-50 mb-4 mb-md-5 animated fadeInUp p-mobile">Ne ndërtojmë detajet qё bejnë diferencen.</p>
+                            <div class="animated fadeInUp d-flex flex-column flex-md-row justify-content-center justify-content-md-end gap-3">
+                                <a href="#galeria" class="btn btn-gold rounded-pill px-4 py-2 px-md-5 py-md-3 fw-bold text-uppercase btn-mobile">Eksploro Galerine</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-item" data-bs-interval="5000">
+            <div class="overlay"></div>
+            <img src="{% static 'images/foto3.jpeg' %}" class="d-block w-100 carousel-img" alt="Sallon Luksoz Mobileri Titi">
+            <div class="carousel-caption d-flex flex-column justify-content-center h-100 text-center">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8 col-md-10 col-sm-12">
+                            <h6 class="text-uppercase text-gold fw-bold mb-3 tracking-wider animated fadeInDown small-mobile">Cilësi që zgjat</h6>
+                            <h1 class="display-5 display-md-3 fw-bold text-white mb-4 animated fadeInUp title-mobile">"Bukuria e vërtetë e drurit qëndron në shpirtin që i japim."</h1>
+                            <p class="lead text-white-50 mb-4 mb-md-5 animated fadeInUp p-mobile">Përjetoni luksin e prekjes së natyrës në çdo cep të shtëpisë suaj.</p>
+                            <div class="animated fadeInUp d-flex justify-content-center">
+                                <a href="tel:+355XXXXXXXXX" class="btn btn-outline-gold rounded-pill px-4 py-2 px-md-5 py-md-3 fw-bold text-uppercase btn-mobile">Na Telefononi</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon p-2 p-md-3 rounded-circle bg-dark" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon p-2 p-md-3 rounded-circle bg-dark" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+
+<section class="py-5" id="produkte">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h6 class="text-gold fw-bold text-uppercase tracking-widest">Koleksionet e Fundit</h6>
+            <h2 class="display-5 fw-bold">Punimet tona më të reja</h2>
+            <div class="divider mx-auto"></div>
+        </div>
+
+        <div class="row g-4">
+            {% for produkt in produktet_e_fundit %}
+            
+            <div class="col-md-6 col-lg-4">
+                <!-- Karta tani është e bllokuar brenda një linku <a> që mbulon çdo gjë -->
+                <a href="{% url 'detajetPage' produkt.pk %}" class="text-decoration-none d-block category-card-link">
+                    <div class="category-card position-relative overflow-hidden rounded shadow-sm">
+                        
+                        {% if produkt.imazhi %}
+                            <img src="{{ produkt.imazhi.url }}" class="img-fluid category-img" alt="{{ produkt.emri }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/800x600" class="img-fluid category-img" alt="Imazhi mungon">
+                        {% endif %}
+                        
+                        <div class="category-overlay d-flex flex-column justify-content-end p-4">
+                            <span class="text-gold small fw-bold text-uppercase mb-1">{{ produkt.kategoria.emri }}</span>
+                            <h4 class="text-white fw-bold mb-1">{{ produkt.emri }}</h4>
+                            
+                            <p class="text-white-50 small mb-2">{{ produkt.pershkrimi|truncatechars:60 }}</p>
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="text-white fw-bold h5 mb-0">{{ produkt.cmimi }} €</span>
+                                <!-- Ndryshuar në <span> pasi nuk lejohet tag <a> brenda një tagu tjetër <a> -->
+                                <span class="btn btn-outline-gold btn-sm rounded-pill px-3 text-uppercase">Detajet</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">Nuk ka produkte të reja për t'u shfaqur.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+
+
+<section class="features-section py-5">
+    <div class="container">
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-6 col-md-3">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-truck fa-2x"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Transport i Shpejtë</h6>
+                    <p class="text-muted small mb-0">Në të gjithë Shqipërinë & Kosovën</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-couch fa-2x"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Cilësi Premium</h6>
+                    <p class="text-muted small mb-0">Materiale druri masiv lisi & pishe</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-tools fa-2x"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Montim Falas</h6>
+                    <p class="text-muted small mb-0">Staf i specializuar deri në shtëpi</p>
+                </div>
+            </div>
+
+            <div class="col-6 col-md-3">
+                <div class="feature-card h-100 p-4 text-center">
+                    <div class="feature-icon-wrapper mb-3">
+                        <i class="fas fa-headset fa-2x"></i>
+                    </div>
+                    <h6 class="fw-bold mb-2">Suport 24/7</h6>
+                    <p class="text-muted small mb-0">Na kontaktoni direkt në WhatsApp</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+
+<section class="hero-banner position-relative overflow-hidden">
+    <div class="container-fluid p-0">
+        <div class="row g-0 align-items-center">
+            <div class="col-lg-5 d-flex align-items-center bg-light-cream py-5 py-lg-0">
+                <div class="hero-content p-5 px-lg-5 mx-lg-5">
+                    <span class="text-uppercase tracking-wider text-muted small fw-bold mb-3 d-block">Oferta e Muajit Mars</span>
+                    <h1 class="display-3 fw-bold lh-1 mb-4">Transformo <span class="text-primary-wood">Shtëpinë</span> Tënde.</h1>
+                    <p class="lead text-muted mb-5">Deri në <strong>20% Ulje</strong> për të gjitha dhomat e gjumit dhe kuzhinat e personalizuara. Cilësi lisi dhe dizajne unike.</p>
+                    <div class="d-grid d-md-flex gap-3">
+                        <a href="/kategoria/dhoma-gjumi" class="btn btn-dark btn-lg px-5 py-3 rounded-pill">Shiko Ofertat</a>
+                        <a href="https://wa.me/355600000000" class="btn btn-outline-dark btn-lg px-5 py-3 rounded-pill">Na Kontakto</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="hero-image-container">
+                    <img src="{% static 'images/mobileri.jpg' %}" alt="Dizajni i brendshëm" class="img-fluid hero-img">
+                    <div class="offer-badge">
+                        <span>-20%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

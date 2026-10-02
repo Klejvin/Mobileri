@@ -1,0 +1,580 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Detajet {% endblock %}
+{% block content %}
+
+<!-- SwiperJS CSS & JS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+        --gold:        #d4a373;
+        --gold-light:  #e8c49a;
+        --gold-dark:   #b5864f;
+        --ink:         #1a1a1a;
+        --ink-soft:    #3d3d3d;
+        --mist:        #f7f4f0;
+        --mist-dark:   #ede9e3;
+        --white:       #ffffff;
+        --border:      rgba(212,163,115,0.18);
+        --shadow-sm:   0 2px 12px rgba(26,26,26,0.07);
+        --shadow-md:   0 8px 40px rgba(26,26,26,0.11);
+        --shadow-lg:   0 20px 60px rgba(26,26,26,0.15);
+        --radius:      16px;
+        --radius-sm:   10px;
+        --radius-pill: 50px;
+        --font-display: 'Cormorant Garamond', Georgia, serif;
+        --font-body:    'DM Sans', sans-serif;
+        --transition:   0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ===== PAGE WRAPPER ===== */
+    .product-detail-container {
+        padding: 72px 0 100px;
+        background: var(--white);
+        font-family: var(--font-body);
+    }
+
+    /* ===== BREADCRUMB STRIP ===== */
+    .pdp-breadcrumb {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #999;
+        margin-bottom: 48px;
+        font-weight: 500;
+    }
+    .pdp-breadcrumb a { color: #999; text-decoration: none; transition: color 0.2s; }
+    .pdp-breadcrumb a:hover { color: var(--gold); }
+    .pdp-breadcrumb span { color: var(--gold-dark); }
+    .pdp-breadcrumb .sep { color: #ccc; font-size: 0.65rem; }
+
+    /* ===== GALLERY COLUMN ===== */
+    .gallery-col {
+        position: sticky;
+        top: 24px;
+    }
+
+    /* Main Swiper */
+    .mainSwiper {
+        width: 100%;
+        aspect-ratio: 4/3.2;
+        border-radius: var(--radius);
+        background: var(--mist);
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        border: 1px solid var(--border);
+    }
+    .mainSwiper .swiper-slide {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--mist);
+    }
+    .mainSwiper img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        cursor: zoom-in;
+        transition: transform 0.5s ease;
+    }
+    .mainSwiper img:hover { transform: scale(1.03); }
+
+    /* Navigation arrows */
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 42px !important;
+        height: 42px !important;
+        background: var(--white);
+        border-radius: 50%;
+        box-shadow: var(--shadow-sm);
+        color: var(--gold-dark) !important;
+        transition: var(--transition);
+    }
+    .swiper-button-next:hover,
+    .swiper-button-prev:hover {
+        background: var(--gold);
+        color: var(--white) !important;
+        box-shadow: 0 6px 24px rgba(212,163,115,0.35);
+    }
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 14px !important;
+        font-weight: 700;
+    }
+
+    /* Thumbnail Swiper */
+    .thumbSwiper {
+        margin-top: 14px;
+        height: 78px;
+    }
+    .thumbSwiper .swiper-slide {
+        border-radius: var(--radius-sm);
+        overflow: hidden;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: var(--transition);
+        opacity: 0.55;
+    }
+    .thumbSwiper .swiper-slide-thumb-active {
+        opacity: 1;
+        border-color: var(--gold);
+        box-shadow: 0 0 0 3px rgba(212,163,115,0.22);
+    }
+    .thumbnail-item-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* Zoom hint badge */
+    .zoom-hint {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        background: rgba(255,255,255,0.85);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        font-size: 0.7rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        padding: 6px 14px;
+        pointer-events: none;
+        z-index: 9;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+    .zoom-hint i { color: var(--gold); }
+
+    /* ===== INFO COLUMN ===== */
+    .info-column-wrapper {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        padding-left: 8px;
+    }
+
+    /* Category tag */
+    .cat-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--mist);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-pill);
+        padding: 6px 16px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--gold-dark);
+        margin-bottom: 20px;
+    }
+    .cat-tag::before {
+        content: '';
+        width: 6px; height: 6px;
+        background: var(--gold);
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    /* Product title */
+    .product-title {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 3.5vw, 2.9rem);
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1.12;
+        letter-spacing: -0.01em;
+        margin: 0 0 24px;
+    }
+
+    /* Price block */
+    .price-block {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        margin-bottom: 28px;
+    }
+    .price-amount {
+        font-family: var(--font-display);
+        font-size: 2.6rem;
+        font-weight: 700;
+        color: var(--ink);
+        line-height: 1;
+    }
+    .price-badge {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: rgba(212,163,115,0.12);
+        color: var(--gold-dark);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 4px 10px;
+    }
+
+    /* Divider */
+    .pdp-divider {
+        width: 40px;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), transparent);
+        border: none;
+        margin: 0 0 24px;
+        border-radius: 2px;
+    }
+
+    /* Scrollable description */
+    .scrollable-content {
+        flex-grow: 1;
+        overflow-y: auto;
+        padding-right: 6px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--gold-light) var(--mist);
+        margin-bottom: 28px;
+    }
+    .scrollable-content::-webkit-scrollbar { width: 4px; }
+    .scrollable-content::-webkit-scrollbar-track { background: var(--mist); border-radius: 4px; }
+    .scrollable-content::-webkit-scrollbar-thumb { background: var(--gold-light); border-radius: 4px; }
+
+    .description-text {
+        font-size: 0.92rem;
+        color: #777;
+        line-height: 1.85;
+        font-weight: 400;
+    }
+    .description-text p { margin-bottom: 12px; }
+
+    /* Feature pills */
+    .feature-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 28px;
+    }
+    .feature-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--mist);
+        border: 1px solid var(--mist-dark);
+        border-radius: var(--radius-pill);
+        font-size: 0.78rem;
+        font-weight: 500;
+        color: var(--ink-soft);
+        padding: 7px 14px;
+    }
+    .feature-pill i { color: var(--gold); font-size: 0.75rem; }
+
+    /* ===== FIXED ACTION AREA ===== */
+    .fixed-action-area {
+        background: var(--white);
+        padding-top: 20px;
+        border-top: 1px solid var(--mist-dark);
+    }
+
+    /* WhatsApp button */
+    .btn-whatsapp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: var(--ink);
+        color: var(--white);
+        padding: 18px 28px;
+        border-radius: var(--radius-pill);
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+        transition: var(--transition);
+        box-shadow: 0 6px 24px rgba(26,26,26,0.18);
+    }
+    .btn-whatsapp::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--gold);
+        transform: translateX(-101%);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        z-index: 0;
+    }
+    .btn-whatsapp:hover::before { transform: translateX(0); }
+    .btn-whatsapp i,
+    .btn-whatsapp span { position: relative; z-index: 1; }
+    .btn-whatsapp:hover { color: var(--white); box-shadow: 0 8px 32px rgba(212,163,115,0.4); }
+    .btn-whatsapp i.fab { font-size: 1.1rem; }
+
+    /* Shipping notice */
+    .shipping-notice {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 16px;
+        padding: 13px 18px;
+        background: var(--mist);
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--mist-dark);
+        font-size: 0.8rem;
+        color: var(--ink-soft);
+        font-weight: 500;
+    }
+    .shipping-notice .ship-icon {
+        width: 30px;
+        height: 30px;
+        background: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-sm);
+        flex-shrink: 0;
+    }
+    .shipping-notice .ship-icon i { color: var(--gold-dark); font-size: 0.8rem; }
+
+    /* ===== MODAL ===== */
+    #imageModal .modal-dialog { max-width: 90vw; }
+    #imageModal .modal-content {
+        background: rgba(10,10,10,0.96);
+        border-radius: var(--radius);
+        border: 1px solid rgba(255,255,255,0.06);
+        backdrop-filter: blur(20px);
+    }
+    #imageModal .modal-body { padding: 40px; }
+    #fullScreenImage {
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: var(--radius-sm);
+    }
+    .modal-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+        background: rgba(255,255,255,0.1);
+        border: none;
+        border-radius: 50%;
+        color: #fff;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s;
+        z-index: 1060;
+    }
+    .modal-close-btn:hover { background: var(--gold); }
+
+    /* ===== ENTRY ANIMATIONS ===== */
+    @keyframes fadeUp {
+        from { opacity: 0; transform: translateY(28px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .anim-1 { animation: fadeUp 0.55s ease both; }
+    .anim-2 { animation: fadeUp 0.55s 0.1s ease both; }
+    .anim-3 { animation: fadeUp 0.55s 0.2s ease both; }
+    .anim-4 { animation: fadeUp 0.55s 0.32s ease both; }
+    .anim-5 { animation: fadeUp 0.55s 0.44s ease both; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 991px) {
+        .gallery-col { position: static; }
+        .info-column-wrapper {
+            height: auto;
+            margin-top: 36px;
+            padding-left: 0;
+        }
+        .scrollable-content {
+            max-height: 360px;
+            overflow-y: auto;
+        }
+        .product-title { font-size: 2rem; }
+    }
+    @media (max-width: 576px) {
+        .product-detail-container { padding: 40px 0 70px; }
+        .pdp-breadcrumb { margin-bottom: 28px; }
+    }
+</style>
+
+<div class="product-detail-container">
+    <div class="container">
+
+        <!-- Breadcrumb -->
+        <div class="pdp-breadcrumb anim-1">
+            <a href="/">Kryefaqja</a>
+            <span class="sep">›</span>
+            <a href="/produktet/">Produkte</a>
+            <span class="sep">›</span>
+            <span>{{ produkti.emri }}</span>
+        </div>
+
+        <div class="row g-5 align-items-start">
+
+            <!-- ── KOLONA E FOTOVE ── -->
+            <div class="col-lg-7 gallery-col anim-2">
+                <div style="position: relative;">
+                    <div class="swiper mainSwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="{{ produkti.imazhi.url }}" class="open-modal-img" alt="{{ produkti.emri }}">
+                            </div>
+                            {% for foto in produkti.galeria.all %}
+                            <div class="swiper-slide">
+                                <img src="{{ foto.imazhi.url }}" class="open-modal-img" alt="{{ produkti.emri }}">
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="zoom-hint">
+                        <i class="fas fa-expand-alt"></i> Zmadho
+                    </div>
+                </div>
+
+                <!-- Thumbnails -->
+                <div class="swiper thumbSwiper d-none d-md-block">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{{ produkti.imazhi.url }}" class="thumbnail-item-img" alt="">
+                        </div>
+                        {% for foto in produkti.galeria.all %}
+                        <div class="swiper-slide">
+                            <img src="{{ foto.imazhi.url }}" class="thumbnail-item-img" alt="">
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── KOLONA E INFORMACIONIT ── -->
+            <div class="col-lg-5">
+                <div class="info-column-wrapper">
+
+                    <!-- Scrollable area -->
+                    <div class="scrollable-content">
+
+                        <div class="anim-3">
+                            <div class="cat-tag">{{ produkti.kategoria.emri }}</div>
+
+                            <h1 class="product-title">{{ produkti.emri }}</h1>
+
+                            <div class="price-block">
+                                <span class="price-amount">{{ produkti.cmimi }}</span>
+
+                            </div>
+
+                            <hr class="pdp-divider">
+
+                            <!-- Feature highlights -->
+                            <div class="feature-pills mb-4">
+                                <span class="feature-pill"><i class="fas fa-shield-alt"></i> Cilësi e garantuar</span>
+                                <span class="feature-pill"><i class="fas fa-paint-brush"></i> Dizajn unik</span>
+                                <span class="feature-pill"><i class="fas fa-truck"></i> Transport falas</span>
+                            </div>
+                        </div>
+
+                        <div class="description-text anim-4">
+                            {{ produkti.pershkrimi|linebreaks }}
+                        </div>
+
+                    </div>
+
+                    <!-- Fixed action area -->
+                    <div class="fixed-action-area anim-5">
+                        <a href="https://wa.me/355697809643?text=Përshëndetje Mobileri Titi! Jam i interesuar për: {{ produkti.emri }}"
+                           target="_blank"
+                           class="btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>Porosit në WhatsApp</span>
+                        </a>
+
+                        <div class="shipping-notice">
+                            <div class="ship-icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div>
+                                <strong style="color:var(--ink);">Transport i sigurt</strong>
+                                &nbsp;·&nbsp; Dërgesa në të gjithë Shqipërinë
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ── MODAL FULL SCREEN ── -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0">
+            <div class="modal-body text-center position-relative">
+                <button class="modal-close-btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <img src="" id="fullScreenImage" class="img-fluid" alt="Full screen view">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Thumbs swiper
+    const swiperThumbs = new Swiper(".thumbSwiper", {
+        spaceBetween: 10,
+        slidesPerView: 5,
+        freeMode: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+            0:   { slidesPerView: 3 },
+            576: { slidesPerView: 4 },
+            768: { slidesPerView: 5 },
+        }
+    });
+
+    // Main swiper
+    const swiperMain = new Swiper(".mainSwiper", {
+        loop: true,
+        spaceBetween: 0,
+        speed: 600,
+        effect: 'fade',
+        fadeEffect: { crossFade: true },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        thumbs: { swiper: swiperThumbs },
+        keyboard: { enabled: true },
+    });
+
+    // Full-screen modal
+    const modalInstance = new bootstrap.Modal(document.getElementById('imageModal'));
+    document.querySelectorAll('.open-modal-img').forEach(img => {
+        img.addEventListener('click', function () {
+            document.getElementById('fullScreenImage').src = this.src;
+            modalInstance.show();
+        });
+    });
+</script>
+
+{% endblock %}

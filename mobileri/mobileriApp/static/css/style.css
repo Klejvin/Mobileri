@@ -1,0 +1,608 @@
+
+
+
+
+
+
+/* Stili për Mobileri Titi */
+.navbar {
+    transition: all 0.3s ease;
+    background-color: #1a1a1a ; /* Një e zezë më e thellë */
+}
+
+.navbar-brand span {
+    font-size: 1.4rem;
+    letter-spacing: 1px;
+}
+
+.nav-link {
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #d4a373 ; /* Ngjyrë druri në hover */
+}
+
+.navbar-toggler:focus {
+    box-shadow: none;
+}
+
+/* Efekti kur bëhet scroll  */
+.navbar.scrolled {
+    padding: 10px 0 ;
+}
+
+.mobileri {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+  font-weight: 700; /* Pasi ke klasën fw-bold, 700 është vlera standarde */
+  font-style: normal;
+}
+
+
+/* FOOTER */
+
+footer {
+    background-color: #121212; /* E zezë mat */
+    border-top: 3px solid #d4a373; /* Linja jeshile/gold te koka e footerit */
+    color: #ffffff;
+}
+
+.text-gold {
+    color: #d4a373; /* Ngjyra e drurit/gold */
+}
+
+.footer-links a:hover {
+    color: #d4a373 ;
+    padding-left: 5px;
+    transition: 0.3s;
+}
+
+.social-icons a {
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.social-icons a:hover {
+    color: #d4a373 ;
+    transform: scale(1.2);
+    display: inline-block;
+}
+
+.text-light-50 {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+
+/* --- Hero Carousel Styles --- */
+
+/* Fix per lartesine e karoselit (Full Screen ose pak me pak) */
+.carousel-img {
+    height: 90vh; /* 90% e lartesisë së ekranit */
+    object-fit: cover; /* Siguron qe fotoja te mos deformohet */
+}
+
+/* Shtresa e erret mbi foto (Overlay) */
+.carousel-item .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* E zeze me 50% transparence */
+    z-index: 1;
+}
+
+/* Rregullimi i tekstit (Caption) */
+.carousel-caption {
+    z-index: 2; /* Siguron qe teksti te jete mbi overlay */
+    bottom: auto; /* Anulon Bootstrap default */
+    top: 0; /* Vendos tekstin ne qender vertikale */
+}
+
+/* Ngjyra Gold (ne rast se nuk e ke shtuar me pare) */
+.text-gold {
+    color: #d4a373 ;
+}
+
+.btn-gold {
+    background-color: #d4a373;
+    border-color: #d4a373;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.btn-gold:hover {
+    background-color: #c09262;
+    border-color: #c09262;
+    color: white;
+}
+
+.btn-outline-gold {
+    border-color: #d4a373;
+    color: #d4a373;
+    transition: 0.3s ease;
+}
+
+.btn-outline-gold:hover {
+    background-color: #d4a373;
+    color: white;
+}
+
+/* --- Animacionet e Tekstit (Opsionale por shume te bukura) --- */
+.animated {
+    animation-duration: 1s;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translate3d(0, -100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fadeInDown {
+    animation-name: fadeInDown;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+/* --- Rregullime responsive per mobile --- */
+@media (max-width: 768px) {
+    /* 1. Zvogelojme lartesine e fotos qe te mos haje gjithe ekranin */
+    .carousel-img {
+        height: 60vh ; 
+    }
+
+    /* 2. Zvogelojme titullin kryesor */
+    .carousel-caption h1 {
+        font-size: 1.8rem ; /* Shume me e vogel dhe e paster */
+        line-height: 1.2;
+    }
+
+    /* 3. Zvogelojme nentitullin (h6) */
+    .carousel-caption h6 {
+        font-size: 0.8rem ;
+        letter-spacing: 1px ;
+    }
+
+    /* 4. Zvogelojme butonat qe te mos jene "te trashë" */
+    .btn-gold, .btn-outline-light, .btn-outline-gold {
+        padding: 10px 20px ;
+        font-size: 0.8rem ;
+    }
+
+    /* 5. Largojme hapesirat e teperta (margins) */
+    .carousel-caption {
+        padding-bottom: 20px;
+    }
+}
+
+
+/* Stilimi i Seksionit te Kategorive */
+.divider {
+    width: 60px;
+    height: 3px;
+    background-color: var(--gold);
+    margin-top: 15px;
+}
+
+.category-card {
+    height: 400px; /* Lartësi fikse për rregullsi */
+    cursor: pointer;
+    border: none;
+}
+
+.category-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    transition: background 0.4s ease;
+}
+
+/* Efekti Hover */
+.category-card:hover .category-img {
+    transform: scale(1.1); /* Zmadhon foton pak */
+}
+
+.category-card:hover .category-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, rgba(0,0,0,0.2) 100%);
+}
+
+.tracking-widest {
+    letter-spacing: 0.2rem;
+}
+
+/* Përshtatja për Mobile */
+@media (max-width: 768px) {
+    .category-card {
+        height: 300px;
+    }
+    .display-5 {
+        font-size: 2rem;
+    }
+}
+
+
+/* --- Detajet e Produktit --- */
+.product-detail-container {
+    padding: 80px 0;
+    background: #fff;
+}
+
+.main-image-wrapper {
+    height: 600px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #f9f9f9;
+}
+
+.main-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.thumb-column {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.thumbnail-item {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.6;
+    border: 2px solid transparent;
+    transition: 0.3s;
+}
+
+.thumbnail-item:hover, .thumb-active {
+    opacity: 1;
+    border-color: #d4a373;
+}
+
+.product-info-box {
+    padding-left: 20px;
+}
+
+.badge-cat {
+    color: #d4a373;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+.price-tag {
+    font-size: 2rem;
+    color: #1a1a1a;
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+.btn-whatsapp {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 18px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.4s;
+    border: none;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.btn-whatsapp:hover {
+    background: #d4a373;
+    transform: translateY(-3px);
+    color: #fff;
+}
+
+
+/* --- Stilimi i Përgjithshëm i Scroll-it --- */
+.product-info-scroll {
+    overflow-y: auto;         /* Mundëson scroll-in */
+    padding-right: 15px;      /* Hapësirë që teksti të mos ngjitet me shiritin e scroll-it */
+    -webkit-overflow-scrolling: touch; /* Scroll i lëmuar për iPhone/Android */
+}
+
+/* Stilimi i shiritit të scroll-it (scrollbar) që të duket më elegant */
+.product-info-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+.product-info-scroll::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;
+}
+.product-info-scroll::-webkit-scrollbar-thumb {
+    background: #d4a373; /* Ngjyra jote Gold/Dru */
+    border-radius: 10px;
+}
+.product-info-scroll::-webkit-scrollbar-thumb:hover {
+    background: #b88a5d;
+}
+
+/* --- Konfigurimi për DESKTOP (Ekrane mbi 992px) --- */
+@media (min-width: 992px) {
+    .product-info-scroll {
+        /* Lartësia maksimale përputhet me main-image-wrapper (600px) */
+        max-height: 600px; 
+    }
+}
+
+/* --- Konfigurimi për MOBILE (Ekrane nën 991px) --- */
+@media (max-width: 991px) {
+    .product-info-scroll {
+        /* Në mobile e bëjmë pak më të shkurtër që të mos zërë gjithë ekranin */
+        max-height: 400px; 
+        margin-top: 20px;
+        padding: 15px;
+        background: #fdfdfd; /* Një sfond shumë i lehtë për ta dalluar si zonë scroll-i */
+        border: 1px solid #eee;
+        border-radius: 10px;
+    }
+    
+    /* Sigurohemi që fotoja në mobile të mos jetë gjigante */
+    .main-image-wrapper {
+        height: 350px !important;
+    }
+}
+
+/* Seksioni i Veçorive */
+.features-section {
+    background-color: #fcfaf8; /* Një krem i lehtë shumë elegant */
+}
+
+.feature-card {
+    background: #ffffff;
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px); /* Karta ngrihet lart */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+}
+
+.feature-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    background: #fdf5ec; /* Ngjyrë e lehtë kafe/krem */
+    color: #d4a373;      /* Ngjyra e drurit që përdorëm te detajet */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin: 0 auto;
+    transition: 0.3s;
+}
+
+.feature-card:hover .feature-icon-wrapper {
+    background: #d4a373;
+    color: #ffffff;
+}
+
+.feature-card h6 {
+    color: #333;
+    font-size: 1.1rem;
+}
+
+/* Rregullim për celular (2 kolona për rresht) */
+@media (max-width: 768px) {
+    .feature-card {
+        padding: 1.5rem 1rem ;
+    }
+}
+
+/* --- Stili i Modal-it për Full Screen --- */
+#fullScreenModal .modal-content {
+    background: rgba(0, 0, 0, 0.9) ;
+    border-radius: 15px;
+}
+
+/* Ky rregull bën butonin X të bardhë dhe të dukshëm mbi foto */
+.btn-close-white {
+    filter: invert(1) grayscale(100%) brightness(200%);
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+.btn-close-white:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Fotoja brenda modalit të mos dalë jashtë ekranit */
+.img-full-view {
+    max-height: 85vh;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+/* Rregullim për shigjetat e Carousel në Full Screen */
+.carousel-control-prev-icon, 
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 20px;
+    background-size: 50%;
+}
+
+
+
+
+/* --- Hero Banner Style --- */
+.hero-banner {
+    min-height: 80vh;
+    background-color: #f8f5f2; /* Krem i lehtë */
+}
+
+.bg-light-cream {
+    background-color: #f8f5f2;
+    min-height: 80vh;
+}
+
+.text-primary-wood {
+    color: #d4a373; /* Ngjyra jonë e drurit */
+}
+
+.hero-img {
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+}
+
+.hero-image-container {
+    position: relative;
+}
+
+/* Rrethi i kuq i ofertës */
+.offer-badge {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    background: #e63946;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Përshtatja për celular */
+@media (max-width: 991px) {
+    .bg-light-cream, .hero-img {
+        min-height: auto;
+    }
+    .hero-img {
+        height: 400px;
+    }
+}
+
+
+
+/* footer map */
+/* Stilimi i kutisë së hartës */
+.custom-map-card {
+    position: relative;
+    width: 100%;
+    height: 150px; /* Mund ta ndryshosh lartësinë sipas dëshirës */
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease-in-out;
+    background-color: #000;
+}
+
+/* Stilimi i imazhit harta.jpeg */
+.custom-map-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Siguron që imazhi të mbushë kutinë pa u shtypur */
+    opacity: 0.9;
+    transition: 0.4s ease;
+}
+
+/* Shtresa overlay që shfaqet në hover */
+.map-hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(212, 163, 115, 0.4); /* Ngjyrë gold transparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.map-hover-overlay span {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.8rem;
+    border: 1px solid #fff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+}
+
+/* Efektet kur kalon miun (Hover) */
+.map-wrapper a:hover .custom-map-card {
+    transform: translateY(-5px);
+    border-color: #d4a373;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+}
+
+.map-wrapper a:hover .custom-map-card img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.map-wrapper a:hover .map-hover-overlay {
+    opacity: 1;
+}
+
+.map-wrapper a:hover p {
+    color: #d4a373 !important;
+}
+
+
+
+
